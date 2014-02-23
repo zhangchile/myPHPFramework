@@ -45,7 +45,8 @@ function removeMagicQuotes()
 function unregisterGlobals()
 {
     if (ini_get('register_globals')) {
-        $array = array('_SESSION', '_POST', '_GET', '_COOKIE', '_REQUEST', '_SERVER', '_ENV', '_FILES');
+        $array = array('_SESSION', '_POST', '_GET', '_COOKIE', '_REQUEST',
+                       '_SERVER', '_ENV', '_FILES');
         foreach ($array as $value) {
             foreach ($GLOBALS[$value] as $key => $var) {
                 if ($var === $GLOBALS[$key]) {
@@ -88,18 +89,19 @@ function callHook()
 
 function __autoload($className)
 {
-    if (file_exists(ROOT . DS . 'library' . DS 
-        . strtolower($className) . '.class.php')
-        ) {
+    if (file_exists(ROOT . DS . 'library' . DS . strtolower($className) . '.class.php')
+    ) {
         require_once(ROOT . DS . 'library' . DS . strtolower($className) . '.class.php');
     } elseif (file_exists(ROOT . DS . 'application' . DS 
-        . 'controllers' . DS .strtolower($className) . '.php')
+                        . 'controllers' . DS .strtolower($className) . '.php')
     ) {
-        require_once(ROOT . DS . 'application' . DS . 'controllers' . DS . strtolower($className) . '.php');
+        require_once(ROOT . DS . 'application' . DS . 'controllers' . DS 
+                    . strtolower($className) . '.php');
     } elseif (file_exists(ROOT . DS . 'application' . DS 
-        . 'models' . DS . strtolower($className) . '.php')
+                        . 'models' . DS . strtolower($className) . '.php')
     ) {
-        require_once(ROOT . DS . 'application' . DS . 'models' . DS . strtolower($className) . '.php');
+        require_once(ROOT . DS . 'application' . DS . 'models' . DS 
+                    . strtolower($className) . '.php');
     } else {
         /* 无法加载类，错误处理代码 */
     }
