@@ -9,7 +9,7 @@ class SQLQuery
     function connect($address, $account, $pwd, $name)
     {
         $this->_dbHandle = @mysql_connect($address, $account, $pwd);
-        if($this->_dbHandle != 0) {
+        if($this->_dbHandle != null) {
             if(mysql_select_db($name, $this->_dbHandle)) {
                 return true;
             } else {
@@ -23,7 +23,7 @@ class SQLQuery
     /** 断开数据库连接 **/
     function disconnect()
     {
-        if(@mysql_close($this->_dbHandle) != 0) {
+        if(@mysql_close($this->_dbHandle) != null) {
             return 1;
         } else {
             return 0;

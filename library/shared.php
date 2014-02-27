@@ -74,8 +74,9 @@ function callHook()
 
     $controllerName = $controller;
     $controllerName = ucwords($controller);//将字符串中每个单词的首字母转换为大写
-    $model = rtrim($controller, 's');//删除字符串末端的's'字符
-    $controller .= 'Controller';
+    $model = $controllerName . 'Model';//删除字符串末端的's'字符
+    $controller = $controllerName . 'Controller';
+
     $dispatch = new $controller($model, $controllerName, $action);
 
     if ((int)method_exists($controller, $action)) {
