@@ -28,7 +28,7 @@ class HTML
         return mysql_real_escape_string($data);
     }
 
-    function link(($text, $path, $prompt = null, $confirmMessage = "Are you sure?")
+    function link($text, $path, $prompt = null, $confirmMessage = "Are you sure?")
     {
         $path = str_replace(' ','-', $path);
         if ($prompt) {
