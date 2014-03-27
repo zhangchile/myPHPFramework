@@ -66,9 +66,18 @@ function callHook()
     $urlArray = array();
     $urlArray = explode("/", $url);
 
-    $controller = $urlArray[0];
+    var_dump($urlArray);
+    if($urlArray[0] != '') {
+        $controller = $urlArray[0];
+    } else {
+        $controller = "index";//默认为index控制器
+    }
     array_shift($urlArray);//将数组开头的单元移出数组
-    $action = $urlArray[0];
+    if(count($urlArray) != 0) {
+        $action = $urlArray[0];     
+    } else {
+        $action = "index";//默认为index方法
+    }
     array_shift($urlArray);
     $queryString = $urlArray;
 
@@ -76,8 +85,11 @@ function callHook()
     $controllerName = ucwords($controller);//将字符串中每个单词的首字母转换为大写
     $model = $controllerName . 'Model';//删除字符串末端的's'字符
     $controller = $controllerName . 'Controller';
-
-    $dispatch = new $controller($model, $controllerName, $action);
+    try{
+        $dispatch = new $controller($model, $controllerName, $action);//如果没该控制器怎么处理
+    } catch(Exception $ex) {
+        echo "404";exit;
+    }
 
     if ((int)method_exists($controller, $action)) {
         call_user_func_array(array($dispatch, $action), $queryString);

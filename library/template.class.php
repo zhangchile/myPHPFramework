@@ -30,7 +30,7 @@ class Template
             //控制器对应的底部 ./application/views/控制器名字/footer.php
             if (file_exists(ROOT . DS . 'application' . DS . 'views' . DS . $this->_controller . DS . 'header.php')) {
                 include (ROOT . DS . 'application' . DS . 'views' . DS . $this->_controller . DS . 'header.php');
-            } else {
+            } else  if (file_exists(ROOT . DS . 'application' . DS . 'views' . DS . 'header.php')){
                 include (ROOT . DS . 'application' . DS . 'views' . DS . 'header.php');//加载模板头部
             }
         }
@@ -43,7 +43,7 @@ class Template
         if($doNotRenderHeader == 0) {
             if (file_exists(ROOT . DS . 'application' . DS . 'views' . DS . $this->_controller . DS . 'footer.php')) {
                 include (ROOT . DS . 'application' . DS . 'views' . DS . $this->_controller . DS . 'footer.php');
-            } else {
+            } else if (file_exists(ROOT . DS . 'application' . DS . 'views' . DS . 'footer' . '.php')){
                 include (ROOT . DS . 'application' . DS . 'views' . DS . 'footer.php');//加载模板底部
             }
         }

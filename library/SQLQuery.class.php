@@ -44,7 +44,12 @@ class SQLQuery
 
     function query($query, $singleResult = 0)
     {
+        //var_dump($query,$this->_dbHandle);
         $this->_result = mysql_query($query, $this->_dbHandle);
+        if(!$this->_result) {//sql错误
+            echo mysql_error();
+            exit;
+        }
         if(preg_match("/select/i", $query))
         {
             $result = array();
